@@ -1,0 +1,1 @@
+(full README.md from Heimnett_pingapp/speedtest/README.md, updated to remove "cd speedtest" step)

@@ -1,0 +1,1 @@
+(full app.js from Heimnett_pingapp/speedtest/server/static/app.js)
