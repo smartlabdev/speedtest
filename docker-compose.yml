@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  speedtest:
+    build: .
+    container_name: speedtest-tr143
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - SERVER_NAME=Heimnett SpeedTest
+      - MAX_SIZE_MB=100
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
