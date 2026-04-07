@@ -36,11 +36,12 @@ class SpeedTest {
   }
 
   async measureUpload(sizeMb = 10) {
+    const RANDOM_SEED_SIZE = 65536; // 64 KB — enough to prevent trivial compression
     const bytes   = sizeMb * 1024 * 1024;
     const payload = new Uint8Array(bytes);
     // Randomise only the first 64 KB — the rest stays zero-filled,
     // which is sufficient for measuring TCP throughput.
-    crypto.getRandomValues(payload.subarray(0, Math.min(bytes, 65536)));
+    crypto.getRandomValues(payload.subarray(0, Math.min(bytes, RANDOM_SEED_SIZE)));
     const t0 = performance.now();
     await fetch('/upload', { method: 'POST', body: payload });
     const elapsed = (performance.now() - t0) / 1000;

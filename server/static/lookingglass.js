@@ -169,9 +169,9 @@ class LookingGlass {
   // ── Traceroute animation ───────────────────────────────────────────────────
 
   async animateTraceroute(targetId) {
-    const section  = document.getElementById('traceroute-section');
-    const subtitle = document.getElementById('traceroute-subtitle');
-    const hopsList = document.getElementById('hops-list');
+    const section             = document.getElementById('traceroute-section');
+    const tracerouteSubtitle  = document.getElementById('traceroute-subtitle');
+    const hopsList            = document.getElementById('hops-list');
     if (!section) return;
 
     hopsList.innerHTML = '';
@@ -183,10 +183,10 @@ class LookingGlass {
       const data = await resp.json();
       hops = data.hops || [];
       if (data.server) {
-        subtitle.textContent = `Ruten fra ${this._sourceName()} til ${data.server.name} (${data.server.location} ${data.server.flag})`;
+        tracerouteSubtitle.textContent = `Ruten fra ${this._sourceName()} til ${data.server.name} (${data.server.location} ${data.server.flag})`;
       }
     } catch (e) {
-      subtitle.textContent = 'Klarte ikke hente rutedata';
+      tracerouteSubtitle.textContent = 'Klarte ikke hente rutedata';
       return;
     }
 
@@ -302,8 +302,9 @@ class LookingGlass {
         `;
       }).join('');
 
-    const best  = results.reduce((a,b) => a.score > b.score ? a : b);
-    const worst = results.reduce((a,b) => a.score < b.score ? a : b);
+    const best  = results.length > 0 ? results.reduce((a,b) => a.score > b.score ? a : b) : null;
+    const worst = results.length > 0 ? results.reduce((a,b) => a.score < b.score ? a : b) : null;
+    if (!best || !worst) return;
     const bestSrv  = this._findServer(best.id);
     const worstSrv = this._findServer(worst.id);
 
