@@ -350,16 +350,8 @@ class LookingGlass {
         btn.textContent = 'Kopiert! ✅';
         setTimeout(() => { btn.textContent = 'Del resultat 📤'; }, 2000);
       } catch (e) {
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        ta.style.position = 'fixed';
-        ta.style.opacity  = '0';
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-        btn.textContent = 'Kopiert! ✅';
-        setTimeout(() => { btn.textContent = 'Del resultat 📤'; }, 2000);
+        // Clipboard API unavailable — show the text so user can copy manually
+        window.prompt('Kopier teksten under (Ctrl+C / Cmd+C):', text);
       }
     });
   }

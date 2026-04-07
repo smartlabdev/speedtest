@@ -38,6 +38,8 @@ class SpeedTest {
   async measureUpload(sizeMb = 10) {
     const bytes   = sizeMb * 1024 * 1024;
     const payload = new Uint8Array(bytes);
+    // Randomise only the first 64 KB — the rest stays zero-filled,
+    // which is sufficient for measuring TCP throughput.
     crypto.getRandomValues(payload.subarray(0, Math.min(bytes, 65536)));
     const t0 = performance.now();
     await fetch('/upload', { method: 'POST', body: payload });
