@@ -15,7 +15,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-MAX_SIZE_MB = int(os.getenv("MAX_SIZE_MB", 100))
+try:
+    MAX_SIZE_MB = int(os.getenv("MAX_SIZE_MB", 100))
+except ValueError:
+    MAX_SIZE_MB = 100
 
 @app.get("/ping")
 async def ping():
