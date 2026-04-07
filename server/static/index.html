@@ -1,1 +1,145 @@
-(full index.html from Heimnett_pingapp/speedtest/server/static/index.html)
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heimnett SpeedTest</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">⚡ Heimnett SpeedTest</div>
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="speedtest">⚡ Hastighet</button>
+      <button class="tab-btn" data-tab="lookingglass">🔭 Nett-reise</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ── Tab 1: Speedtest ───────────────────────────────────────────── -->
+    <section id="tab-speedtest" class="tab-content active">
+      <div class="speedtest-container">
+        <div class="speedtest-hero">
+          <button id="start-test" class="start-btn">
+            <span class="start-icon">⚡</span>
+            <span class="start-label">START TEST</span>
+          </button>
+          <p class="hint-text" id="hint-text">Trykk for å måle internett-hastigheten din</p>
+        </div>
+
+        <div class="progress-wrap" id="progress-wrap" style="display:none">
+          <div class="progress-bar-outer">
+            <div class="progress-bar-inner" id="progress-bar"></div>
+          </div>
+          <div class="phase-label" id="phase-label">Forbereder…</div>
+        </div>
+
+        <div class="metrics-grid" id="metrics-grid">
+          <div class="metric-card" id="card-ping">
+            <div class="metric-icon">📶</div>
+            <div class="metric-label">Ping</div>
+            <div class="metric-value" id="val-ping">—</div>
+            <div class="metric-unit">ms</div>
+            <div class="metric-desc">Forsinkelse — lavere er bedre</div>
+          </div>
+          <div class="metric-card" id="card-download">
+            <div class="metric-icon">⬇️</div>
+            <div class="metric-label">Nedlasting</div>
+            <div class="metric-value" id="val-download">—</div>
+            <div class="metric-unit">Mbit/s</div>
+            <div class="metric-desc">Hvor raskt du laster ned</div>
+          </div>
+          <div class="metric-card" id="card-upload">
+            <div class="metric-icon">⬆️</div>
+            <div class="metric-label">Opplasting</div>
+            <div class="metric-value" id="val-upload">—</div>
+            <div class="metric-unit">Mbit/s</div>
+            <div class="metric-desc">Hvor raskt du laster opp</div>
+          </div>
+        </div>
+
+        <div class="result-summary" id="result-summary" style="display:none">
+          <div class="result-verdict" id="result-verdict"></div>
+          <div class="result-detail" id="result-detail"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Tab 2: Looking Glass ───────────────────────────────────────── -->
+    <section id="tab-lookingglass" class="tab-content">
+      <!-- Source selector -->
+      <div class="lg-section">
+        <div class="lg-section-title">📡 VELG MÅLEKILDE — Hvor kjøres testen fra?</div>
+        <div class="source-grid" id="source-grid">
+          <!-- Filled by JS -->
+        </div>
+      </div>
+
+      <!-- Server category tabs + grid -->
+      <div class="lg-section">
+        <div class="lg-section-title">
+          🖥️ VELG SERVERE
+          <span class="server-counter" id="server-counter">0/5 valgt</span>
+        </div>
+        <p class="lg-subtitle">Velg opptil 5 servere du vil teste mot:</p>
+        <div class="cat-tabs" id="cat-tabs">
+          <button class="cat-tab active" data-cat="gaming">🎮 Gaming</button>
+          <button class="cat-tab" data-cat="streaming">📺 Streaming</button>
+          <button class="cat-tab" data-cat="work">💼 Hjemmekontor</button>
+          <button class="cat-tab" data-cat="general">🌐 Infrastruktur</button>
+        </div>
+        <div class="server-grid" id="server-grid">
+          <!-- Filled by JS -->
+        </div>
+      </div>
+
+      <!-- Run test button -->
+      <div class="lg-section lg-run-section">
+        <button class="run-btn" id="run-lg-btn" disabled>🚀 KJØR TEST</button>
+      </div>
+
+      <!-- Traceroute animation -->
+      <div class="lg-section" id="traceroute-section" style="display:none">
+        <div class="lg-section-title">🗺️ RUTEN PAKKEN DIN REISER</div>
+        <p class="lg-subtitle" id="traceroute-subtitle"></p>
+        <div class="hops-list" id="hops-list"></div>
+      </div>
+
+      <!-- Comparison table -->
+      <div class="lg-section" id="comparison-section" style="display:none">
+        <div class="lg-section-title">📊 SAMMENLIGNING</div>
+        <div class="table-wrap">
+          <table class="comparison-table" id="comparison-table">
+            <thead>
+              <tr>
+                <th>Server</th>
+                <th>Ping</th>
+                <th>Jitter</th>
+                <th>Score</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="comparison-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Report card -->
+      <div class="lg-section" id="report-section" style="display:none">
+        <div class="lg-section-title">🏆 RAPPORT</div>
+        <div class="report-card" id="report-card">
+          <!-- Filled by JS -->
+        </div>
+        <button class="share-btn" id="share-btn">Del resultat 📤</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Heimnett SpeedTest — Laget for vanlige folk 🇳🇴</span>
+  </footer>
+
+  <script src="app.js"></script>
+  <script src="lookingglass.js"></script>
+</body>
+</html>
